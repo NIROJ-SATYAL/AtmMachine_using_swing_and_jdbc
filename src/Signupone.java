@@ -3,9 +3,10 @@ import java.awt.*;
 import java.util.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import com.toedter.calendar.JDateChooser;
 public class Signupone extends JFrame {
 
-    JTextField username , useremail, userphone,userAddress ;
+
 
 
 
@@ -18,7 +19,7 @@ public class Signupone extends JFrame {
         setSize(850,800);
         setLayout(null);
         setTitle("Sign up form");
-        setVisible(true);
+
         //to set the location of frame we use setLocation function
         setLocation(350,30);
 //        to change the background color of frame
@@ -50,12 +51,11 @@ public class Signupone extends JFrame {
         namelabel.setForeground(Color.black);
         add(namelabel);
 
+        JTextField nameTextField = new JTextField(20);
+        nameTextField.setBounds(300, 150, 350, 30);
+        add(nameTextField);
 
 
-        //        textfield for name
-        username=new JTextField(20);
-        useremail.setBounds(220,150,350 ,40);
-        add(username);
 
 
 //        label for email
@@ -65,15 +65,9 @@ public class Signupone extends JFrame {
         emaillabel.setForeground(Color.black);
         add(emaillabel);
 
-
-
-//        textfield for email
-       useremail=new JTextField(20);
-        useremail.setBounds(220,150,350 ,40);
-        add(useremail);
-
-
-
+        JTextField emailTextField = new JTextField(20);
+        emailTextField.setBounds(300, 200, 350, 30);
+        add(emailTextField);
 
 
         //        label for phonenumber
@@ -82,6 +76,118 @@ public class Signupone extends JFrame {
         phonelabel.setFont(new Font("osward",Font.BOLD,20) );
         phonelabel.setForeground(Color.black);
         add(phonelabel);
+
+
+        JTextField phoneTextField = new JTextField(20);
+        phoneTextField.setBounds(300, 250, 350, 30);
+        add(phoneTextField);
+//Label for date of birth
+        JLabel dateofbirth=new JLabel("DOB:");
+        dateofbirth.setBounds(100,300,100 ,40);
+        dateofbirth.setFont(new Font("osward",Font.BOLD,20) );
+        dateofbirth.setForeground(Color.black);
+        add(dateofbirth);
+
+
+        JDateChooser dateChooser=new JDateChooser();
+        dateChooser.setBounds(300,300 ,350,30);
+        add(dateChooser);
+//label for gender
+
+        JLabel gender=new JLabel("GENDER:");
+        gender.setBounds(100,350,100 ,40);
+        gender.setFont(new Font("osward",Font.BOLD,20) );
+        gender.setForeground(Color.black);
+        add(gender);
+
+
+
+        JRadioButton male=new JRadioButton("Male");
+        male.setBounds(300 , 350, 80 ,40);
+        male.setBackground(Color.white);
+        add(male);
+
+        JRadioButton female=new JRadioButton("Female");
+        female.setBounds(400 , 350, 80 ,40);
+        female.setBackground(Color.white);
+        add(female);
+
+
+        JRadioButton others=new JRadioButton("OTHERS");
+        others.setBounds(500 , 350, 80 ,40);
+        others.setBackground(Color.white);
+        add(others);
+
+
+        ButtonGroup gendergroup=new ButtonGroup();
+        gendergroup.add(male);
+        gendergroup.add(female);
+        gendergroup.add(others);
+
+
+//        label for address
+
+
+        JLabel address=new JLabel("ADDRESS:");
+        address.setBounds(100,400,100 ,40);
+        address.setFont(new Font("osward",Font.BOLD,20) );
+        address.setForeground(Color.black);
+        add(address);
+
+        JTextField addressTextField = new JTextField(20);
+        addressTextField.setBounds(300, 400, 350, 30);
+        add(addressTextField);
+//label for city
+
+        JLabel city=new JLabel("CITY:");
+        city.setBounds(100,450,100 ,40);
+        city.setFont(new Font("osward",Font.BOLD,20) );
+        city.setForeground(Color.black);
+        add(city);
+
+
+        JTextField cityTextField = new JTextField(20);
+        cityTextField.setBounds(300, 450, 350, 30);
+        add(cityTextField);
+
+
+
+
+//        label for state
+
+
+        JLabel state=new JLabel("STATE:");
+        state.setBounds(100,500,100 ,40);
+        state.setFont(new Font("osward",Font.BOLD,20) );
+        state.setForeground(Color.black);
+        add(state);
+
+        JTextField stateTextField = new JTextField(20);
+        stateTextField.setBounds(300, 500, 350, 30);
+        add(stateTextField);
+
+
+        JButton clear=new JButton("Clear");
+        clear.setBounds(150 ,600,100,40);
+        clear.setBackground(Color.black);
+        clear.setForeground(Color.white);
+        add(clear);
+
+        JButton next=new JButton("Next");
+        next.setBounds(600 ,600,100,40);
+        next.setBackground(Color.black);
+        next.setForeground(Color.white);
+        add(next);
+
+
+
+
+
+
+
+
+
+        setVisible(true);
 
 
     }

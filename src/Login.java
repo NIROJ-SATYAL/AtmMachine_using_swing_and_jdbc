@@ -1,7 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Login extends JFrame {
+public class Login extends JFrame  implements ActionListener {
+    JButton signin ,clear, signup;
+    JTextField cardfield,pinfield;
 //constructor of Login class .it will call whenever a object of login class is created....
     public Login(){
 //       To Set The Title of frame
@@ -38,7 +42,7 @@ public class Login extends JFrame {
 
 
         //        text field for card_num
-        JTextField cardfield = new JTextField(20);
+         cardfield = new JTextField(20);
         cardfield.setBounds(240,180,200 ,30);
         add(cardfield);
 
@@ -49,37 +53,43 @@ public class Login extends JFrame {
         add(pin_num);
 
         //        text field for pin_num
-        JTextField pinfield = new JTextField(20);
+       pinfield = new JTextField(20);
         pinfield.setBounds(240,220,200 ,30);
         add(pinfield);
 
 
 //        button for singup
 
-        JButton sign_button=new JButton("SIGN IN");
-        sign_button.setBounds(200,300,100,30);
-        sign_button.setBackground(Color.black);
-        sign_button.setForeground(Color.WHITE);
-        add(sign_button);
+         signin=new JButton("SIGN IN");
+        signin.setBounds(200,300,100,30);
+        signin.setBackground(Color.black);
+        signin.setForeground(Color.WHITE);
+        signin.addActionListener(this);
+        add(signin);
 
 
         //        button for clear
 
-        JButton clear_button=new JButton("clear");
-        clear_button.setBounds(450,300,100,30);
-        clear_button.setBackground(Color.black);
-        clear_button.setForeground(Color.WHITE);
-        add(clear_button);
+         clear=new JButton("clear");
+        clear.setBounds(350,300,100,30);
+        clear.setBackground(Color.black);
+        clear.setForeground(Color.WHITE);
+        clear.addActionListener(this);
+
+        add(clear);
 
 
 
         //        button for sign up
 
-        JButton SIGNUP_button=new JButton("SIGN UP");
-        SIGNUP_button.setBounds(300,450,500,30);
-        SIGNUP_button.setBackground(Color.black);
-        SIGNUP_button.setForeground(Color.WHITE);
-        add(SIGNUP_button);
+         signup=new JButton("SIGN UP");
+        signup.setBounds(200,350,250,30);
+        signup.setBackground(Color.black);
+        signup.setForeground(Color.WHITE);
+        signup.addActionListener(this);
+        add(signup);
+
+
 
 
 
@@ -91,10 +101,28 @@ public class Login extends JFrame {
         setLocation(350,200);
 //        to change the background color of frame
         getContentPane().setBackground(Color.white);
+
+
+
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==signin){
+            System.out.println("signin button click");
+        } else if (e.getSource()==clear) {
+            cardfield.setText("");
+            pinfield.setText("");
+        } else if (e.getSource()==signup) {
+            System.out.println("signup button clicked.....");
+        }
+
+
     }
 
     public static void main(String[] args) {
         new Login();
 
     }
+
+
 }

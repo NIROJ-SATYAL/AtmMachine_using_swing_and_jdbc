@@ -1,3 +1,4 @@
+import javax.sound.midi.Soundbank;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -10,16 +11,16 @@ public class Signuptwo  extends JFrame implements    ActionListener  {
 
     private Connection connection;
     String formno;
-    JLabel Additional_Details, religion, category, income, education, occupation, panLabel, adharLabel, seniorCitizenLabel,l10, QualidicationLabel, formNumLabel, formnum, fatherNameLabel, motherNameLabel;
+    JLabel Additional_Details, religion, category, income, education, occupation, panLabel, grandfatheLabel, seniorCitizenLabel,l10, QualidicationLabel, formNumLabel, formnum, fatherNameLabel, motherNameLabel;
     JButton nextButtton;
     JRadioButton yesLabel, NoLabel;
 
-    JTextField panfield, adharfield, fatherNameField, motherNameField,t5;
+    JTextField panfield, grandfathernamefield, fatherNameField, motherNameField,t5;
     JComboBox religionField, categoryField, incomeField, educationField, occupationField;
     ButtonGroup citizengrp;
 
 
-    public  Signuptwo(long rand) {
+    public  Signuptwo(long rand,Connection connection) {
 
 
 //        addWindowListener(new WindowAdapter() {
@@ -67,6 +68,7 @@ public class Signuptwo  extends JFrame implements    ActionListener  {
 
 
         this.formno =  "" + rand;
+        this.connection=connection;
         setTitle("NEW ACCOUNT APPLICATION FORM - PAGE 2");
 
         Additional_Details = new JLabel("Page 2: Additonal Details");
@@ -75,47 +77,47 @@ public class Signuptwo  extends JFrame implements    ActionListener  {
 
 
 
-        religion = new JLabel("Religion:");
+        religion = new JLabel("Religion:*");
         religion.setFont(new Font("Raleway", Font.BOLD, 18));
 
-        category = new JLabel("Category:");
+        category = new JLabel("Category:*");
         category.setFont(new Font("Raleway", Font.BOLD, 18));
 
-        income = new JLabel("Income:");
+        income = new JLabel("Income:*");
         income.setFont(new Font("Raleway", Font.BOLD, 18));
 
-        education = new JLabel("Educational");
+        education = new JLabel("Educational:*");
         education.setFont(new Font("Raleway", Font.BOLD, 18));
 
-        QualidicationLabel = new JLabel("Qualification:");
+        QualidicationLabel = new JLabel("Qualification:*");
         QualidicationLabel.setFont(new Font("Raleway", Font.BOLD, 18));
 
-        occupation = new JLabel("Occupation:");
+        occupation = new JLabel("Occupation:*");
         occupation.setFont(new Font("Raleway", Font.BOLD, 18));
 
         panLabel = new JLabel("PAN Number:");
         panLabel.setFont(new Font("Raleway", Font.BOLD, 18));
 
-        adharLabel = new JLabel("Aadhar Number:");
-        adharLabel.setFont(new Font("Raleway", Font.BOLD, 18));
+        grandfatheLabel = new JLabel("GrandFather Name:*");
+        grandfatheLabel.setFont(new Font("Raleway", Font.BOLD, 18));
 
-        seniorCitizenLabel = new JLabel("Senior Citizen:");
+        seniorCitizenLabel = new JLabel("Senior Citizen:*");
         seniorCitizenLabel.setFont(new Font("Raleway", Font.BOLD, 18));
 //
 //        l10 = new JLabel("Existing Account:");
 //        l10.setFont(new Font("Raleway", Font.BOLD, 18));
 
-        formNumLabel = new JLabel("Form No:");
+        formNumLabel = new JLabel("Form No:*");
         formNumLabel.setFont(new Font("Raleway", Font.BOLD, 13));
 
         formnum = new JLabel(formno);
         formnum.setFont(new Font("Raleway", Font.BOLD, 13));
 
 
-        fatherNameLabel = new JLabel(" Father Name");
+        fatherNameLabel = new JLabel(" Father Name:*");
         fatherNameLabel.setFont(new Font("Raleway", Font.BOLD, 22));
 
-        motherNameLabel = new JLabel(" Mother Name");
+        motherNameLabel = new JLabel(" Mother Name:*");
         motherNameLabel.setFont(new Font("Raleway", Font.BOLD, 22));
 
         nextButtton = new JButton("Next");
@@ -126,8 +128,8 @@ public class Signuptwo  extends JFrame implements    ActionListener  {
         panfield = new JTextField();
         panfield.setFont(new Font("Raleway", Font.BOLD, 14));
 
-        adharfield = new JTextField();
-        adharfield.setFont(new Font("Raleway", Font.BOLD, 14));
+        grandfathernamefield = new JTextField();
+        grandfathernamefield.setFont(new Font("Raleway", Font.BOLD, 14));
 
         fatherNameField = new JTextField();
         fatherNameField.setFont(new Font("Raleway", Font.BOLD, 14));
@@ -235,11 +237,11 @@ public class Signuptwo  extends JFrame implements    ActionListener  {
         panfield.setBounds(350, 390, 320, 30);
         add(panfield);
 
-        adharLabel.setBounds(100, 440, 180, 30);
-        add(adharLabel);
+        grandfatheLabel.setBounds(100, 440, 180, 30);
+        add(grandfatheLabel);
 
-        adharfield.setBounds(350, 440, 320, 30);
-        add(adharfield);
+        grandfathernamefield.setBounds(350, 440, 320, 30);
+        add(grandfathernamefield);
 
         seniorCitizenLabel.setBounds(100, 490, 150, 30);
         add(seniorCitizenLabel);
@@ -277,6 +279,7 @@ public class Signuptwo  extends JFrame implements    ActionListener  {
         setSize(850, 750);
         setLocation(250, 20);
         setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
 
@@ -293,7 +296,7 @@ public class Signuptwo  extends JFrame implements    ActionListener  {
             String occupation=(String) occupationField.getSelectedItem();
             String education=(String) educationField.getSelectedItem();
             String pannumber=panfield.getText();
-            String adharnumber=adharfield.getText();
+            String grandfather_name= grandfathernamefield.getText();
             String father_name=fatherNameField.getText();
             String mother_name=motherNameField.getText();
             String getcitizen="";
@@ -304,23 +307,83 @@ public class Signuptwo  extends JFrame implements    ActionListener  {
                 getcitizen="No";
 
             }
+//
+//            System.out.println(religion);
+//            System.out.println(category);
+//            System.out.println(income);
+//            System.out.println(occupation);
+//            System.out.println(education);
+//            System.out.println(pannumber);
+//            System.out.println(grandfather_name);
+//            System.out.println(father_name);
+//            System.out.println(mother_name);
+//            System.out.println(getcitizen);
+//
 
-            System.out.println(religion);
-            System.out.println(category);
-            System.out.println(income);
-            System.out.println(occupation);
-            System.out.println(education);
-            System.out.println(pannumber);
-            System.out.println(adharnumber);
-            System.out.println(father_name);
-            System.out.println(mother_name);
-            System.out.println(getcitizen);
+            if(religion.equals(""))
+            {
+                JOptionPane.showMessageDialog(null,"religion is required");
+            } else if (category.equals("")) {
+                JOptionPane.showMessageDialog(null,"category is required");
+
+            } else if (income.equals("")) {
+                JOptionPane.showMessageDialog(null,"income is required");
+            } else if (occupation.equals("")) {
+                JOptionPane.showMessageDialog(null,"occupation is required");
+
+            } else if (education.equals("")) {
+                JOptionPane.showMessageDialog(null,"education is required");
+
+            } else if (grandfather_name.equals("")) {
+                JOptionPane.showMessageDialog(null,"grandfather Name is required");
+
+            } else if (father_name.equals("")) {
+                JOptionPane.showMessageDialog(null,"father name is required");
+
+            } else if (mother_name.equals("")) {
+                JOptionPane.showMessageDialog(null,"mothername is required");
+            } else if (getcitizen.equals("")) {
+                JOptionPane.showMessageDialog(null,"Senior citizen  is required");
+
+            }
+            else {
+
+
+                if (checkUserExist(formno)) {
+                    String query = "insert into additionaldetails(userid,religion,category,income,occupation,education,grandfathername,pannumber,fathername,mothername) values (?,?,?,?,?,?,?,?,?,?)";
+                    try {
+                        PreparedStatement pst = connection.prepareStatement(query);
+                        pst.setString(1, formno);
+                        pst.setString(2, religion);
+                        pst.setString(3, category);
+                        pst.setString(4, income);
+                        pst.setString(5, occupation);
+                        pst.setString(6, education);
+                        pst.setString(7, grandfather_name);
+                        pst.setString(8, pannumber);
+                        pst.setString(9, father_name);
+                        pst.setString(10, mother_name);
+                        int rowAffected = pst.executeUpdate();
+                        if (rowAffected > 0) {
+                            System.out.println("data inserted successfully......");
+                        }
+
+                    } catch (SQLException e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage());
+                        throw new RuntimeException(e);
+
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "first fill up personal details");
+                }
+            }
         }
     }
 
 
 
-    public boolean checkUserExist (String formno) {
+    public  boolean checkUserExist (String formno) {
         String query = "select * from personaldetails where user_formnum=?";
         try {
             PreparedStatement pst = connection.prepareStatement(query);
@@ -340,8 +403,8 @@ public class Signuptwo  extends JFrame implements    ActionListener  {
 
 
     public static void main(String[] args) {
-        System.out.println("signup2");
-        new Signuptwo(1234);
+//        System.out.println("signup2");
+//        new Signuptwo(1234);
     }
 
 

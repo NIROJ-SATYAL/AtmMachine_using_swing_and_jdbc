@@ -4,10 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Signuptwo  extends JFrame   {
-    JLabel l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12,l13;
+    JLabel l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12,l13,l14,l15;
     JButton b;
-    JRadioButton r1,r2,r3,r4;
-    JTextField t1,t2,t3;
+    JRadioButton r1,r2;
+    JTextField t1,t2,t3,t4,t5;
     JComboBox c1,c2,c3,c4,c5;
     String formno;
 
@@ -26,6 +26,9 @@ public class Signuptwo  extends JFrame   {
 
         l1 = new JLabel("Page 2: Additonal Details");
         l1.setFont(new Font("Raleway", Font.BOLD, 22));
+
+
+
 
         l2 = new JLabel("Religion:");
         l2.setFont(new Font("Raleway", Font.BOLD, 18));
@@ -53,15 +56,22 @@ public class Signuptwo  extends JFrame   {
 
         l9 = new JLabel("Senior Citizen:");
         l9.setFont(new Font("Raleway", Font.BOLD, 18));
-
-        l10 = new JLabel("Existing Account:");
-        l10.setFont(new Font("Raleway", Font.BOLD, 18));
+//
+//        l10 = new JLabel("Existing Account:");
+//        l10.setFont(new Font("Raleway", Font.BOLD, 18));
 
         l12 = new JLabel("Form No:");
         l12.setFont(new Font("Raleway", Font.BOLD, 13));
 
         l13 = new JLabel(formno);
         l13.setFont(new Font("Raleway", Font.BOLD, 13));
+
+
+        l14 = new JLabel(" Father Name");
+        l14.setFont(new Font("Raleway", Font.BOLD, 22));
+
+        l15 = new JLabel(" Mother Name");
+        l15.setFont(new Font("Raleway", Font.BOLD, 22));
 
         b = new JButton("Next");
         b.setFont(new Font("Raleway", Font.BOLD, 14));
@@ -74,6 +84,12 @@ public class Signuptwo  extends JFrame   {
         t2 = new JTextField();
         t2.setFont(new Font("Raleway", Font.BOLD, 14));
 
+        t3 = new JTextField();
+        t3.setFont(new Font("Raleway", Font.BOLD, 14));
+
+        t4 = new JTextField();
+        t4.setFont(new Font("Raleway", Font.BOLD, 14));
+
         r1 = new JRadioButton("Yes");
         r1.setFont(new Font("Raleway", Font.BOLD, 14));
         r1.setBackground(Color.WHITE);
@@ -82,13 +98,13 @@ public class Signuptwo  extends JFrame   {
         r2.setFont(new Font("Raleway", Font.BOLD, 14));
         r2.setBackground(Color.WHITE);
 
-        r3 = new JRadioButton("Yes");
-        r3.setFont(new Font("Raleway", Font.BOLD, 14));
-        r3.setBackground(Color.WHITE);
-
-        r4 = new JRadioButton("No");
-        r4.setFont(new Font("Raleway", Font.BOLD, 14));
-        r4.setBackground(Color.WHITE);
+//        r3 = new JRadioButton("Yes");
+//        r3.setFont(new Font("Raleway", Font.BOLD, 14));
+//        r3.setBackground(Color.WHITE);
+//
+//        r4 = new JRadioButton("No");
+//        r4.setFont(new Font("Raleway", Font.BOLD, 14));
+//        r4.setBackground(Color.WHITE);
 
 
         String religion[] = {"Hindu", "Muslim", "Sikh", "Christian", "Other"};
@@ -183,14 +199,22 @@ public class Signuptwo  extends JFrame   {
         r2.setBounds(460, 490, 100, 30);
         add(r2);
 
-        l10.setBounds(100, 540, 180, 30);
-        add(l10);
+        l14.setBounds(100, 540, 180, 30);
+        add(l14);
+        t3.setBounds(350,540,320,30);
+        add(t3);
 
-        r3.setBounds(350, 540, 100, 30);
-        add(r3);
+        l15.setBounds(100, 590,180,30);
+        add(l15);
+        t4.setBounds(350,590, 320,30);
+        add(t4);
 
-        r4.setBounds(460, 540, 100, 30);
-        add(r4);
+
+//        r3.setBounds(350, 540, 100, 30);
+//        add(r3);
+//
+//        r4.setBounds(460, 540, 100, 30);
+//        add(r4);
 
         b.setBounds(570, 640, 100, 30);
         add(b);
@@ -200,7 +224,7 @@ public class Signuptwo  extends JFrame   {
         getContentPane().setBackground(Color.WHITE);
 
         setSize(850, 750);
-        setLocation(500, 120);
+        setLocation(250, 20);
         setVisible(true);
 
 

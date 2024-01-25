@@ -11,6 +11,7 @@ public class Signupone extends JFrame  implements   ActionListener {
 
 
     long rand;
+    private Connection connection;
 
 
     JTextField nameTextField,emailTextField,phoneTextField,addressTextField,cityTextField,stateTextField;
@@ -20,6 +21,9 @@ public class Signupone extends JFrame  implements   ActionListener {
     ButtonGroup gendergroup;
 
     public  Signupone(){
+
+        Conn conn=new Conn();
+        this.connection=conn.c;
 
 
         Random ran =new Random();
@@ -229,9 +233,7 @@ public class Signupone extends JFrame  implements   ActionListener {
 //validation
 
             try {
-//                if (userName.equals("") && userEmial.equals("") && userPhone.equals("") && userAddress.equals("") && userCity.equals("") && userState.equals("") && userDob.equals("") && userGender.equals("")) {
-//                    JOptionPane.showMessageDialog(null, "All field are required:");
-//                }
+//
 
                 if(userName.equals(""))
                 {
@@ -261,12 +263,10 @@ public class Signupone extends JFrame  implements   ActionListener {
 
 
                     String query="Insert into personaldetails(user_name,user_email,user_phone,user_dob,user_gender,user_address,user_city,user_state,user_formnum) values(?,?,?,?,?,?,?,?,?)";
-                    Conn connection=new Conn();
-
-                    Connection  connection1= connection.c;
 
 
-                    PreparedStatement pst=connection1.prepareStatement(query);
+
+                    PreparedStatement pst=connection.prepareStatement(query);
                     pst.setString(1,userName);
                     pst.setString(2,userEmial);
                     pst.setString(3,userPhone);
@@ -281,7 +281,7 @@ public class Signupone extends JFrame  implements   ActionListener {
                     {
                         System.out.println("data inserted successfully");
                         setVisible(false);
-                        new Signuptwo(rand);
+                        new Signuptwo(rand,connection);
 
                     }
                     else

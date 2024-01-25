@@ -23,6 +23,7 @@ public class Signupone extends JFrame  implements   ActionListener {
 
 
         Random ran =new Random();
+
          rand=Math.abs((ran.nextLong() % 9000l) + 10000l);
         setSize(850,800);
         setLayout(null);
@@ -209,6 +210,7 @@ public class Signupone extends JFrame  implements   ActionListener {
         if(e.getSource()==next)
         {
 //            Extract the value from textfield
+            String prinum="" + rand;
             String userName=nameTextField.getText();
             String userEmial=emailTextField.getText();
             String userPhone=phoneTextField.getText();
@@ -258,10 +260,11 @@ public class Signupone extends JFrame  implements   ActionListener {
                 else {
 
 
-                    String query="Insert into userPersonalDetails(user_name,user_email,user_phone,user_dob,user_gender,user_address,user_city,user_state) values(?,?,?,?,?,?,?,?)";
+                    String query="Insert into personaldetails(user_name,user_email,user_phone,user_dob,user_gender,user_address,user_city,user_state,user_formnum) values(?,?,?,?,?,?,?,?,?)";
                     Conn connection=new Conn();
 
                     Connection  connection1= connection.c;
+
 
                     PreparedStatement pst=connection1.prepareStatement(query);
                     pst.setString(1,userName);
@@ -272,21 +275,26 @@ public class Signupone extends JFrame  implements   ActionListener {
                     pst.setString(6,userAddress);
                     pst.setString(7,userCity);
                     pst.setString(8,userState);
+                    pst.setString(9,prinum );
                     int rowAffected=pst.executeUpdate();
                     if(rowAffected>0)
                     {
                         System.out.println("data inserted successfully");
+                        setVisible(false);
+                        new Signuptwo(rand);
+
                     }
                     else
                     {
                         System.out.println("failed to signup");
+
                     }
                 }
 
             }
             catch (Exception se)
             {
-                System.out.println(se.getMessage());
+                JOptionPane.showMessageDialog(null,se.getMessage());
             }
 
         }

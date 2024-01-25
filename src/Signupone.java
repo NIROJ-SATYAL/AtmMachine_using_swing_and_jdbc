@@ -1,10 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import com.toedter.calendar.JDateChooser;
-public class Signupone extends JFrame implements  ActionListener {
+public class Signupone extends JFrame  implements   ActionListener {
 
 
     long rand;
@@ -205,13 +208,14 @@ public class Signupone extends JFrame implements  ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==next)
         {
+//            Extract the value from textfield
             String userName=nameTextField.getText();
             String userEmial=emailTextField.getText();
             String userPhone=phoneTextField.getText();
             String userAddress=addressTextField.getText();
             String userCity=cityTextField.getText();
             String userState=stateTextField.getText();
-            String userDob=dateChooser.getDate().toString();
+            String userDob = ((JTextField) dateChooser.getDateEditor().getUiComponent()).getText();
             String userGender = "";
             if (male.isSelected()) {
                 userGender = "Male";
@@ -220,15 +224,71 @@ public class Signupone extends JFrame implements  ActionListener {
             } else if (others.isSelected()) {
                 userGender = "Others";
             }
+//validation
 
-            System.out.println(userDob);
-            System.out.println(userCity);
-            System.out.println(userAddress);
-            System.out.println(userEmial);
-            System.out.println(userGender);
-            System.out.println(userName);
-            System.out.println(userPhone);
-            System.out.println(userState);
+            try {
+//                if (userName.equals("") && userEmial.equals("") && userPhone.equals("") && userAddress.equals("") && userCity.equals("") && userState.equals("") && userDob.equals("") && userGender.equals("")) {
+//                    JOptionPane.showMessageDialog(null, "All field are required:");
+//                }
+
+                if(userName.equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "name s required");
+                } else if (userEmial.equals("")) {
+                    JOptionPane.showMessageDialog(null,"Email is required");
+                } else if (userPhone.equals("")) {
+                    JOptionPane.showMessageDialog(null,"Phone number is required");
+
+                } else if (userGender.equals("")) {
+                    JOptionPane.showMessageDialog(null,"Gender is required");
+
+                } else if (userDob.equals("")) {
+                    JOptionPane.showMessageDialog(null,"Date of Birth is required");
+
+                } else if (userAddress.equals("")) {
+                    JOptionPane.showMessageDialog(null,"Address is required");
+
+                } else if (userCity.equals("")) {
+
+                    JOptionPane.showMessageDialog(null,"city is required");
+
+                } else if (userState.equals("")) {
+                    JOptionPane.showMessageDialog(null,"State is required");
+                }
+                else {
+
+
+                    String query="Insert into userPersonalDetails(user_name,user_email,user_phone,user_dob,user_gender,user_address,user_city,user_state) values(?,?,?,?,?,?,?,?)";
+                    Conn connection=new Conn();
+
+                    Connection  connection1= connection.c;
+
+                    PreparedStatement pst=connection1.prepareStatement(query);
+                    pst.setString(1,userName);
+                    pst.setString(2,userEmial);
+                    pst.setString(3,userPhone);
+                    pst.setString(4,userDob);
+                    pst.setString(5,userGender);
+                    pst.setString(6,userAddress);
+                    pst.setString(7,userCity);
+                    pst.setString(8,userState);
+                    int rowAffected=pst.executeUpdate();
+                    if(rowAffected>0)
+                    {
+                        System.out.println("data inserted successfully");
+                    }
+                    else
+                    {
+                        System.out.println("failed to signup");
+                    }
+                }
+
+            }
+            catch (Exception se)
+            {
+                System.out.println(se.getMessage());
+            }
+
         }
         else if (e.getSource()==clear) {
 

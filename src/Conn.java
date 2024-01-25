@@ -1,7 +1,7 @@
 import java.sql.*;
 
 public class    Conn {
-    Connection c;
+     Connection c;
 
 
     public Conn() {
@@ -24,7 +24,5 @@ public class    Conn {
     }
 
 
-    public static void main(String[] args) {
-        Conn conn=new Conn();
-    }
+
 }

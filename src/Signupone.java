@@ -14,6 +14,7 @@ public class Signupone extends JFrame implements  ActionListener {
     JDateChooser dateChooser;
     JRadioButton male ,female,others;
     JButton clear,next;
+    ButtonGroup gendergroup;
 
     public  Signupone(){
 
@@ -123,7 +124,7 @@ public class Signupone extends JFrame implements  ActionListener {
         add(others);
 
 
-        ButtonGroup gendergroup=new ButtonGroup();
+         gendergroup=new ButtonGroup();
         gendergroup.add(male);
         gendergroup.add(female);
         gendergroup.add(others);
@@ -194,6 +195,7 @@ public class Signupone extends JFrame implements  ActionListener {
 
 
         setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
     }
@@ -203,11 +205,46 @@ public class Signupone extends JFrame implements  ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==next)
         {
-            System.out.println("sign_up successfully");
+            String userName=nameTextField.getText();
+            String userEmial=emailTextField.getText();
+            String userPhone=phoneTextField.getText();
+            String userAddress=addressTextField.getText();
+            String userCity=cityTextField.getText();
+            String userState=stateTextField.getText();
+            String userDob=dateChooser.getDate().toString();
+            String userGender = "";
+            if (male.isSelected()) {
+                userGender = "Male";
+            } else if (female.isSelected()) {
+                userGender = "Female";
+            } else if (others.isSelected()) {
+                userGender = "Others";
+            }
+
+            System.out.println(userDob);
+            System.out.println(userCity);
+            System.out.println(userAddress);
+            System.out.println(userEmial);
+            System.out.println(userGender);
+            System.out.println(userName);
+            System.out.println(userPhone);
+            System.out.println(userState);
         }
         else if (e.getSource()==clear) {
 
-            System.out.println("clear all data");
+            nameTextField.setText("");
+            emailTextField.setText("");
+            phoneTextField.setText("");
+            addressTextField.setText("");
+            cityTextField.setText("");
+            stateTextField.setText("");
+            dateChooser.setDate(null);
+
+            // Deselect radio buttons
+            gendergroup.clearSelection();
+
+
+
         }
 
 

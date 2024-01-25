@@ -4,18 +4,22 @@ import java.util.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import com.toedter.calendar.JDateChooser;
-public class Signupone extends JFrame {
+public class Signupone extends JFrame implements  ActionListener {
 
 
+    long rand;
 
 
-
+    JTextField nameTextField,emailTextField,phoneTextField,addressTextField,cityTextField,stateTextField;
+    JDateChooser dateChooser;
+    JRadioButton male ,female,others;
+    JButton clear,next;
 
     public  Signupone(){
 
 
         Random ran =new Random();
-        long rand=Math.abs((ran.nextLong() % 9000l) + 10000l);
+         rand=Math.abs((ran.nextLong() % 9000l) + 10000l);
         setSize(850,800);
         setLayout(null);
         setTitle("Sign up form");
@@ -29,7 +33,7 @@ public class Signupone extends JFrame {
 
 
 //main title
-        JLabel titles=new JLabel("APPLICATION NO 2 " + rand );
+        JLabel titles=new JLabel("APPLICATION NO  " + rand );
         titles.setBounds(140,40,600 ,50);
         titles.setFont(new Font("osward",Font.BOLD,38) );
         titles.setForeground(Color.black);
@@ -51,7 +55,7 @@ public class Signupone extends JFrame {
         namelabel.setForeground(Color.black);
         add(namelabel);
 
-        JTextField nameTextField = new JTextField(20);
+         nameTextField = new JTextField(20);
         nameTextField.setBounds(300, 150, 350, 30);
         add(nameTextField);
 
@@ -65,7 +69,7 @@ public class Signupone extends JFrame {
         emaillabel.setForeground(Color.black);
         add(emaillabel);
 
-        JTextField emailTextField = new JTextField(20);
+        emailTextField = new JTextField(20);
         emailTextField.setBounds(300, 200, 350, 30);
         add(emailTextField);
 
@@ -78,7 +82,7 @@ public class Signupone extends JFrame {
         add(phonelabel);
 
 
-        JTextField phoneTextField = new JTextField(20);
+       phoneTextField = new JTextField(20);
         phoneTextField.setBounds(300, 250, 350, 30);
         add(phoneTextField);
 //Label for date of birth
@@ -89,7 +93,7 @@ public class Signupone extends JFrame {
         add(dateofbirth);
 
 
-        JDateChooser dateChooser=new JDateChooser();
+         dateChooser=new JDateChooser();
         dateChooser.setBounds(300,300 ,350,30);
         add(dateChooser);
 //label for gender
@@ -102,18 +106,18 @@ public class Signupone extends JFrame {
 
 
 
-        JRadioButton male=new JRadioButton("Male");
+        male=new JRadioButton("Male");
         male.setBounds(300 , 350, 80 ,40);
         male.setBackground(Color.white);
         add(male);
 
-        JRadioButton female=new JRadioButton("Female");
+         female=new JRadioButton("Female");
         female.setBounds(400 , 350, 80 ,40);
         female.setBackground(Color.white);
         add(female);
 
 
-        JRadioButton others=new JRadioButton("OTHERS");
+        others=new JRadioButton("OTHERS");
         others.setBounds(500 , 350, 80 ,40);
         others.setBackground(Color.white);
         add(others);
@@ -134,7 +138,7 @@ public class Signupone extends JFrame {
         address.setForeground(Color.black);
         add(address);
 
-        JTextField addressTextField = new JTextField(20);
+        addressTextField = new JTextField(20);
         addressTextField.setBounds(300, 400, 350, 30);
         add(addressTextField);
 //label for city
@@ -146,7 +150,7 @@ public class Signupone extends JFrame {
         add(city);
 
 
-        JTextField cityTextField = new JTextField(20);
+        cityTextField = new JTextField(20);
         cityTextField.setBounds(300, 450, 350, 30);
         add(cityTextField);
 
@@ -162,21 +166,23 @@ public class Signupone extends JFrame {
         state.setForeground(Color.black);
         add(state);
 
-        JTextField stateTextField = new JTextField(20);
+         stateTextField = new JTextField(20);
         stateTextField.setBounds(300, 500, 350, 30);
         add(stateTextField);
 
 
-        JButton clear=new JButton("Clear");
+         clear=new JButton("Clear");
         clear.setBounds(150 ,600,100,40);
         clear.setBackground(Color.black);
         clear.setForeground(Color.white);
+        clear.addActionListener(this);
         add(clear);
 
-        JButton next=new JButton("Next");
+         next=new JButton("Next");
         next.setBounds(600 ,600,100,40);
         next.setBackground(Color.black);
         next.setForeground(Color.white);
+        next.addActionListener(this);
         add(next);
 
 
@@ -193,7 +199,23 @@ public class Signupone extends JFrame {
     }
 
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==next)
+        {
+            System.out.println("sign_up successfully");
+        }
+        else if (e.getSource()==clear) {
+
+            System.out.println("clear all data");
+        }
+
+
+    }
+
+
     public static void main(String[] args) {
             new Signupone();
     }
+
 }

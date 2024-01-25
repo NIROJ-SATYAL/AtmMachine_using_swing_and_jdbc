@@ -3,9 +3,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Signuptwo  extends JFrame   {
+public class Signuptwo  extends JFrame implements    ActionListener  {
 
     private Connection connection;
     String formno;
@@ -15,46 +16,47 @@ public class Signuptwo  extends JFrame   {
 
     JTextField panfield, adharfield, fatherNameField, motherNameField,t5;
     JComboBox religionField, categoryField, incomeField, educationField, occupationField;
+    ButtonGroup citizengrp;
 
 
-    public  Signuptwo(long rand,Connection connection) {
+    public  Signuptwo(long rand) {
 
 
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                // Perform your operations here
-                // For example, ask the user for confirmation
-                int option = JOptionPane.showConfirmDialog(
-                        Signuptwo.this,
-                        "Do you really want to exit?",
-                        "Confirm Exit",
-                        JOptionPane.YES_NO_OPTION);
-
-                if (option == JOptionPane.YES_OPTION) {
-                       String query="Delete from personaldetails where user_formnum=?";
-                       try{
-                           PreparedStatement pst=connection.prepareStatement(query);
-                           pst.setString(1,formno);
-                           int rowAffected=pst.executeUpdate();
-                           if(rowAffected>0)
-                           {
-                               dispose();
-                           }
-
-
-                       } catch (SQLException ex) {
-                           throw new RuntimeException(ex);
-                       }
-
-                }
-                else {
-
-
-
-                }
-            }
-        });
+//        addWindowListener(new WindowAdapter() {
+//            @Override
+//            public void windowClosing(WindowEvent e) {
+//                // Perform your operations here
+//                // For example, ask the user for confirmation
+//                int option = JOptionPane.showConfirmDialog(
+//                        Signuptwo.this,
+//                        "Do you really want to exit?",
+//                        "Confirm Exit",
+//                        JOptionPane.YES_NO_OPTION);
+//
+//                if (option == JOptionPane.YES_OPTION) {
+//                       String query="Delete from personaldetails where user_formnum=?";
+//                       try{
+//                           PreparedStatement pst=connection.prepareStatement(query);
+//                           pst.setString(1,formno);
+//                           int rowAffected=pst.executeUpdate();
+//                           if(rowAffected>0)
+//                           {
+//                               dispose();
+//                           }
+//
+//
+//                       } catch (SQLException ex) {
+//                           throw new RuntimeException(ex);
+//                       }
+//
+//                }
+//                else {
+//
+//
+//
+//                }
+//            }
+//        });
 
 //        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("ASimulatorSystem/icons/logo.jpg"));
 //        Image i2 = i1.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
@@ -140,6 +142,12 @@ public class Signuptwo  extends JFrame   {
         NoLabel = new JRadioButton("No");
         NoLabel.setFont(new Font("Raleway", Font.BOLD, 14));
         NoLabel.setBackground(Color.WHITE);
+
+
+        citizengrp=new ButtonGroup();
+        citizengrp.add( yesLabel);
+        citizengrp.add(NoLabel);
+
 
 //        r3 = new JRadioButton("Yes");
 //        r3.setFont(new Font("Raleway", Font.BOLD, 14));
@@ -262,7 +270,7 @@ public class Signuptwo  extends JFrame   {
         nextButtton.setBounds(570, 640, 100, 30);
         add(nextButtton);
 
-//            b.addActionListener(this);
+            nextButtton.addActionListener(this);
 
         getContentPane().setBackground(Color.WHITE);
 
@@ -275,9 +283,65 @@ public class Signuptwo  extends JFrame   {
     }
 
 
+
+    public void actionPerformed(ActionEvent ae){
+        if(ae.getSource()==nextButtton)
+        {
+            String religion=(String) religionField.getSelectedItem();
+            String category=(String) categoryField.getSelectedItem();
+            String income=(String) incomeField.getSelectedItem();
+            String occupation=(String) occupationField.getSelectedItem();
+            String education=(String) educationField.getSelectedItem();
+            String pannumber=panfield.getText();
+            String adharnumber=adharfield.getText();
+            String father_name=fatherNameField.getText();
+            String mother_name=motherNameField.getText();
+            String getcitizen="";
+            if(yesLabel.isSelected())
+            {
+                getcitizen="yes";
+            } else if (NoLabel.isSelected()) {
+                getcitizen="No";
+
+            }
+
+            System.out.println(religion);
+            System.out.println(category);
+            System.out.println(income);
+            System.out.println(occupation);
+            System.out.println(education);
+            System.out.println(pannumber);
+            System.out.println(adharnumber);
+            System.out.println(father_name);
+            System.out.println(mother_name);
+            System.out.println(getcitizen);
+        }
+    }
+
+
+
+    public boolean checkUserExist (String formno) {
+        String query = "select * from personaldetails where user_formnum=?";
+        try {
+            PreparedStatement pst = connection.prepareStatement(query);
+            pst.setString(1, formno);
+            ResultSet result = pst.executeQuery();
+            if (result.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+
+        }
+    }
+
+
     public static void main(String[] args) {
         System.out.println("signup2");
-//        new Signuptwo(1234);
+        new Signuptwo(1234);
     }
 
 

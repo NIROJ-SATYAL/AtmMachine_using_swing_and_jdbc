@@ -281,7 +281,7 @@ public class Signupone extends JFrame  implements   ActionListener {
                     {
                         System.out.println("data inserted successfully");
                         setVisible(false);
-                        new Signuptwo(rand,connection);
+                        new Signuptwo(rand);
 
                     }
                     else

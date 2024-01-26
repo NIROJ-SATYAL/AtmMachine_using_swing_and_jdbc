@@ -1,7 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
 
-public class signupthree extends JFrame {
+public class signupthree extends JFrame implements ActionListener {
 
     private String  formnum;
 
@@ -199,9 +202,11 @@ public class signupthree extends JFrame {
 
         submit.setBounds(250,610,100,30);
         add(submit);
+        submit.addActionListener(this);
 
         cancel.setBounds(420,610,100,30);
         add(cancel);
+        cancel.addActionListener(this);
 
 
         getContentPane().setBackground(Color.WHITE);
@@ -213,6 +218,64 @@ public class signupthree extends JFrame {
 
 //        b1.addActionListener((ActionListener) this);
 //        b2.addActionListener(this);
+
+    }
+
+
+
+    public void actionPerformed(ActionEvent ae)
+    {
+
+        if(ae.getSource()==submit)
+        {
+
+            String accounttype="";
+            if(savingAccount.isSelected())
+            {
+                accounttype="Saving Account";
+            } else if (currentAccount.isSelected()) {
+                accounttype="Current Account";
+
+            } else if (fixedDeposit.isSelected()) {
+                accounttype="Fixed Deopsit";
+
+            } else if (RecureDeposit.isSelected()) {
+                accounttype="Recure deposit";
+            }
+
+
+
+            String bank_service="";
+
+            if(internetBanking.isSelected())
+            {
+                bank_service=bank_service + "Internet_Banking";
+            } else if (emailAlerts.isSelected()) {
+                bank_service=bank_service + " Email_Alerts";
+
+            } else if (eStatement.isSelected()) {
+                bank_service=bank_service + " E_Statement";
+
+            } else if (chequeBook.isSelected()) {
+                bank_service=bank_service + " Cheque_Book";
+
+            } else if (mobileBanking.isSelected()) {
+                bank_service=bank_service + " Mobile_Banking";
+
+            }
+
+
+            Random ran = new Random();
+            long first7 = (ran.nextLong() % 90000000L) + 5040936000000000L;
+            String cardno = "" + Math.abs(first7);
+
+            long first3 = (ran.nextLong() % 9000L) + 1000L;
+            String pin = "" + Math.abs(first3);
+
+        } else if (ae.getSource()==cancel) {
+
+
+        }
 
     }
 

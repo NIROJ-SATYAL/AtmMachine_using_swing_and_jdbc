@@ -2,13 +2,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Login extends JFrame  implements ActionListener {
+    Connection connection;
     JButton signin ,clear, signup;
+
     JTextField cardfield;
     JPasswordField pinfield;
 //constructor of Login class .it will call whenever a object of login class is created....
     public Login(){
+
+        Conn conn=new Conn();
+        this.connection=conn.c;
+
 //       To Set The Title of frame
         setTitle("Bank Management System");
 //        to use custom layout
@@ -109,16 +119,39 @@ public class Login extends JFrame  implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==signin){
-            String  cart_num=cardfield.getText();
+            String  card_num=cardfield.getText();
             String pin_num=pinfield.getText();
-            System.out.println(cart_num);
+            System.out.println(card_num);
             System.out.println(pin_num);
+            String query="select * from signup where card_num=? and pin_num=?";
+            try{
+                PreparedStatement pst=connection.prepareStatement(query);
+                pst.setString(1,card_num);
+                pst.setString(2,pin_num);
+                ResultSet result=pst.executeQuery();
+                if(result.next())
+                {
+                    System.out.println("login successfully.....");
+//                    create a object of transaction
+                }
+                else {
+                    JOptionPane.showMessageDialog(null,"account doesn't exist..sign Up first");
+                }
+
+            }
+            catch(SQLException ae)
+            {
+                JOptionPane.showMessageDialog(null , ae.getMessage());
+            }
+
 
         } else if (e.getSource()==clear) {
             cardfield.setText("");
             pinfield.setText("");
         } else if (e.getSource()==signup) {
             System.out.println("signup button clicked.....");
+            setVisible(false);
+            new Signupone();
         }
 
 

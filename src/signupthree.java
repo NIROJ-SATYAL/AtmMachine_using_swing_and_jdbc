@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class signupthree extends JFrame {
 
@@ -8,10 +7,10 @@ public class signupthree extends JFrame {
 
 
 
-    JLabel l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12;
-    JRadioButton r1,r2,r3,r4;
-    JButton b1,b2;
-    JCheckBox c1,c2,c3,c4,c5,c6,c7;
+    JLabel accountDetailslabel, accounttypelabel, cardnumberlabel, anlabel, cardnumlabel, conditionlabel, pinlabel, pinnumberlabel, digitlabel, servicerequiredlabel, formnumlabel, formnumber;
+    JRadioButton savingAccount, fixedDeposit, currentAccount, RecureDeposit;
+    JButton submit, cancel;
+    JCheckBox atm, internetBanking, mobileBanking, emailAlerts, chequeBook, eStatement,c7;
 
 
 
@@ -29,185 +28,185 @@ public class signupthree extends JFrame {
 //        l14.setBounds(150, 0, 100, 100);
 //        add(l14);
 
-        l1 = new JLabel("Page 3: Account Details");
-        l1.setFont(new Font("Raleway", Font.BOLD, 22));
+        accountDetailslabel = new JLabel("Page 3: Account Details");
+        accountDetailslabel.setFont(new Font("Raleway", Font.BOLD, 22));
 
-        l2 = new JLabel("Account Type:");
-        l2.setFont(new Font("Raleway", Font.BOLD, 18));
+        accounttypelabel = new JLabel("Account Type:");
+        accounttypelabel.setFont(new Font("Raleway", Font.BOLD, 18));
 
-        l3 = new JLabel("Card Number:");
-        l3.setFont(new Font("Raleway", Font.BOLD, 18));
+        cardnumberlabel = new JLabel("Card Number:");
+        cardnumberlabel.setFont(new Font("Raleway", Font.BOLD, 18));
 
-        l4 = new JLabel("XXXX-XXXX-XXXX-4184");
-        l4.setFont(new Font("Raleway", Font.BOLD, 18));
+        anlabel = new JLabel("XXXX-XXXX-XXXX-4184");
+        anlabel.setFont(new Font("Raleway", Font.BOLD, 18));
 
-        l5 = new JLabel("(Your 16-digit Card number)");
-        l5.setFont(new Font("Raleway", Font.BOLD, 12));
+        cardnumlabel = new JLabel("(Your 16-digit Card number)");
+        cardnumlabel.setFont(new Font("Raleway", Font.BOLD, 12));
 
-        l6 = new JLabel("It would appear on ATM Card/Cheque Book and Statements");
-        l6.setFont(new Font("Raleway", Font.BOLD, 12));
+        conditionlabel = new JLabel("It would appear on ATM Card/Cheque Book and Statements");
+        conditionlabel.setFont(new Font("Raleway", Font.BOLD, 12));
 
-        l7 = new JLabel("PIN:");
-        l7.setFont(new Font("Raleway", Font.BOLD, 18));
+        pinlabel = new JLabel("PIN:");
+        pinlabel.setFont(new Font("Raleway", Font.BOLD, 18));
 
-        l8 = new JLabel("XXXX");
-        l8.setFont(new Font("Raleway", Font.BOLD, 18));
+        pinnumberlabel = new JLabel("XXXX");
+        pinnumberlabel.setFont(new Font("Raleway", Font.BOLD, 18));
 
-        l9 = new JLabel("(4-digit password)");
-        l9.setFont(new Font("Raleway", Font.BOLD, 12));
+        digitlabel = new JLabel("(4-digit password)");
+        digitlabel.setFont(new Font("Raleway", Font.BOLD, 12));
 
-        l10 = new JLabel("Services Required:");
-        l10.setFont(new Font("Raleway", Font.BOLD, 18));
+        servicerequiredlabel = new JLabel("Services Required:");
+        servicerequiredlabel.setFont(new Font("Raleway", Font.BOLD, 18));
 
-        l11 = new JLabel("Form No:");
-        l11.setFont(new Font("Raleway", Font.BOLD, 14));
+        formnumlabel = new JLabel("Form No:");
+        formnumlabel.setFont(new Font("Raleway", Font.BOLD, 14));
 
-        l12 = new JLabel(formnum);
-        l12.setFont(new Font("Raleway", Font.BOLD, 14));
+        formnumber = new JLabel(formnum);
+        formnumber.setFont(new Font("Raleway", Font.BOLD, 14));
 
-        b1 = new JButton("Submit");
-        b1.setFont(new Font("Raleway", Font.BOLD, 14));
-        b1.setBackground(Color.BLACK);
-        b1.setForeground(Color.WHITE);
+        submit = new JButton("Submit");
+        submit.setFont(new Font("Raleway", Font.BOLD, 14));
+        submit.setBackground(Color.BLACK);
+        submit.setForeground(Color.WHITE);
 
-        b2 = new JButton("Cancel");
-        b2.setFont(new Font("Raleway", Font.BOLD, 14));
-        b2.setBackground(Color.BLACK);
-        b2.setForeground(Color.WHITE);
+        cancel = new JButton("Cancel");
+        cancel.setFont(new Font("Raleway", Font.BOLD, 14));
+        cancel.setBackground(Color.BLACK);
+        cancel.setForeground(Color.WHITE);
 
 
-        c1 = new JCheckBox("ATM CARD");
-        c1.setBackground(Color.WHITE);
-        c1.setFont(new Font("Raleway", Font.BOLD, 16));
+        atm = new JCheckBox("ATM CARD");
+        atm.setBackground(Color.WHITE);
+        atm.setFont(new Font("Raleway", Font.BOLD, 16));
 
-        c2 = new JCheckBox("Internet Banking");
-        c2.setBackground(Color.WHITE);
-        c2.setFont(new Font("Raleway", Font.BOLD, 16));
+        internetBanking = new JCheckBox("Internet Banking");
+        internetBanking.setBackground(Color.WHITE);
+        internetBanking.setFont(new Font("Raleway", Font.BOLD, 16));
 
-        c3 = new JCheckBox("Mobile Banking");
-        c3.setBackground(Color.WHITE);
-        c3.setFont(new Font("Raleway", Font.BOLD, 16));
+        mobileBanking = new JCheckBox("Mobile Banking");
+        mobileBanking.setBackground(Color.WHITE);
+        mobileBanking.setFont(new Font("Raleway", Font.BOLD, 16));
 
-        c4 = new JCheckBox("EMAIL Alerts");
-        c4.setBackground(Color.WHITE);
-        c4.setFont(new Font("Raleway", Font.BOLD, 16));
+        emailAlerts = new JCheckBox("EMAIL Alerts");
+        emailAlerts.setBackground(Color.WHITE);
+        emailAlerts.setFont(new Font("Raleway", Font.BOLD, 16));
 
-        c5 = new JCheckBox("Cheque Book");
-        c5.setBackground(Color.WHITE);
-        c5.setFont(new Font("Raleway", Font.BOLD, 16));
+        chequeBook = new JCheckBox("Cheque Book");
+        chequeBook.setBackground(Color.WHITE);
+        chequeBook.setFont(new Font("Raleway", Font.BOLD, 16));
 
-        c6 = new JCheckBox("E-Statement");
-        c6.setBackground(Color.WHITE);
-        c6.setFont(new Font("Raleway", Font.BOLD, 16));
+        eStatement = new JCheckBox("E-Statement");
+        eStatement.setBackground(Color.WHITE);
+        eStatement.setFont(new Font("Raleway", Font.BOLD, 16));
 
         c7 = new JCheckBox("I hereby declares that the above entered details correct to th best of my knowledge.",true);
         c7.setBackground(Color.WHITE);
         c7.setFont(new Font("Raleway", Font.BOLD, 12));
 
 
-        r1 = new JRadioButton("Saving Account");
-        r1.setFont(new Font("Raleway", Font.BOLD, 16));
-        r1.setBackground(Color.WHITE);
+        savingAccount = new JRadioButton("Saving Account");
+        savingAccount.setFont(new Font("Raleway", Font.BOLD, 16));
+        savingAccount.setBackground(Color.WHITE);
 
-        r2 = new JRadioButton("Fixed Deposit Account");
-        r2.setFont(new Font("Raleway", Font.BOLD, 16));
-        r2.setBackground(Color.WHITE);
+        fixedDeposit = new JRadioButton("Fixed Deposit Account");
+        fixedDeposit.setFont(new Font("Raleway", Font.BOLD, 16));
+        fixedDeposit.setBackground(Color.WHITE);
 
-        r3 = new JRadioButton("Current Account");
-        r3.setFont(new Font("Raleway", Font.BOLD, 16));
-        r3.setBackground(Color.WHITE);
+        currentAccount = new JRadioButton("Current Account");
+        currentAccount.setFont(new Font("Raleway", Font.BOLD, 16));
+        currentAccount.setBackground(Color.WHITE);
 
-        r4 = new JRadioButton("Recurring Deposit Account");
-        r4.setFont(new Font("Raleway", Font.BOLD, 16));
-        r4.setBackground(Color.WHITE);
+        RecureDeposit = new JRadioButton("Recurring Deposit Account");
+        RecureDeposit.setFont(new Font("Raleway", Font.BOLD, 16));
+        RecureDeposit.setBackground(Color.WHITE);
 
         ButtonGroup groupgender = new ButtonGroup();
-        groupgender.add(r1);
-        groupgender.add(r2);
-        groupgender.add(r3);
-        groupgender.add(r4);
+        groupgender.add(savingAccount);
+        groupgender.add(fixedDeposit);
+        groupgender.add(currentAccount);
+        groupgender.add(RecureDeposit);
 
         setLayout(null);
 
-        l11.setBounds(700,10,70,30);
-        add(l11);
+        formnumlabel.setBounds(700,10,70,30);
+        add(formnumlabel);
 
-        l12.setBounds(770,10,40,30);
-        add(l12);
+        formnumber.setBounds(770,10,40,30);
+        add(formnumber);
 
-        l1.setBounds(280,40,400,40);
-        add(l1);
+        accountDetailslabel.setBounds(280,40,400,40);
+        add(accountDetailslabel);
 
-        l2.setBounds(100,140,200,30);
-        add(l2);
+        accounttypelabel.setBounds(100,100,200,30);
+        add(accounttypelabel);
 
-        r1.setBounds(100,180,150,30);
-        add(r1);
+        savingAccount.setBounds(100,140,150,30);
+        add(savingAccount);
 
-        r2.setBounds(350,180,300,30);
-        add(r2);
+        fixedDeposit.setBounds(350,140,300,30);
+        add(fixedDeposit);
 
-        r3.setBounds(100,220,250,30);
-        add(r3);
+        currentAccount.setBounds(100,180,250,30);
+        add(currentAccount);
 
-        r4.setBounds(350,220,250,30);
-        add(r4);
+        RecureDeposit.setBounds(350,180,250,30);
+        add(RecureDeposit);
 
-        l3.setBounds(100,300,200,30);
-        add(l3);
+        cardnumberlabel.setBounds(100,220,200,30);
+        add(cardnumberlabel);
 
-        l4.setBounds(330,300,250,30);
-        add(l4);
+        anlabel.setBounds(330,220,250,30);
+        add(anlabel);
 
-        l5.setBounds(100,330,200,20);
-        add(l5);
+        cardnumlabel.setBounds(100,270,200,20);
+        add(cardnumlabel);
 
-        l6.setBounds(330,330,500,20);
-        add(l6);
+        conditionlabel.setBounds(330,270,500,20);
+        add(conditionlabel);
 
-        l7.setBounds(100,370,200,30);
-        add(l7);
+        pinlabel.setBounds(100,310,200,30);
+        add(pinlabel);
 
-        l8.setBounds(330,370,200,30);
-        add(l8);
+        pinnumberlabel.setBounds(330,310,200,30);
+        add(pinnumberlabel);
 
-        l9.setBounds(100,400,200,20);
-        add(l9);
+        digitlabel.setBounds(100,330,200,20);
+        add(digitlabel);
 
-        l10.setBounds(100,450,200,30);
-        add(l10);
+        servicerequiredlabel.setBounds(100,370,200,30);
+        add(servicerequiredlabel);
 
-        c1.setBounds(100,500,200,30);
-        add(c1);
+        atm.setBounds(100,410,200,30);
+        add(atm);
 
-        c2.setBounds(350,500,200,30);
-        add(c2);
+        internetBanking.setBounds(350,410,200,30);
+        add(internetBanking);
 
-        c3.setBounds(100,550,200,30);
-        add(c3);
+        mobileBanking.setBounds(100,460,200,30);
+        add(mobileBanking);
 
-        c4.setBounds(350,550,200,30);
-        add(c4);
+        emailAlerts.setBounds(350,460,200,30);
+        add(emailAlerts);
 
-        c5.setBounds(100,600,200,30);
-        add(c5);
+        chequeBook.setBounds(100,500,200,30);
+        add(chequeBook);
 
-        c6.setBounds(350,600,200,30);
-        add(c6);
+        eStatement.setBounds(350,500,200,30);
+        add(eStatement);
 
-        c7.setBounds(100,680,600,20);
+        c7.setBounds(100,560,560,20);
         add(c7);
 
-        b1.setBounds(250,720,100,30);
-        add(b1);
+        submit.setBounds(250,610,100,30);
+        add(submit);
 
-        b2.setBounds(420,720,100,30);
-        add(b2);
+        cancel.setBounds(420,610,100,30);
+        add(cancel);
 
 
         getContentPane().setBackground(Color.WHITE);
 
-        setSize(850,850);
+        setSize(950,950);
         setLocation(100,30);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

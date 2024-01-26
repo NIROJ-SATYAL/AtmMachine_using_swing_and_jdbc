@@ -366,6 +366,8 @@ public class Signuptwo  extends JFrame implements    ActionListener  {
                         int rowAffected = pst.executeUpdate();
                         if (rowAffected > 0) {
                             System.out.println("data inserted successfully......");
+                            setVisible(false);
+                            new signupthree(formno,connection);
                         }
 
                     } catch (SQLException e) {

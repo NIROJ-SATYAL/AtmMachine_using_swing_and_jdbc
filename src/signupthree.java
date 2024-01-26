@@ -2,11 +2,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Random;
 
 public class signupthree extends JFrame implements ActionListener {
 
     private String  formnum;
+    private Connection connection;
 
 
 
@@ -17,11 +21,12 @@ public class signupthree extends JFrame implements ActionListener {
 
 
 
-    public signupthree( String formnum)
+    public signupthree(String formnum , Connection conn)
 
     {
 
         this.formnum=formnum;
+        this.connection=conn;
         setTitle("NEW ACCOUNT APPLICATION FORM - PAGE 3");
 
 //        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("ASimulatorSystem/icons/logo.jpg"));
@@ -272,6 +277,65 @@ public class signupthree extends JFrame implements ActionListener {
             long first3 = (ran.nextLong() % 9000L) + 1000L;
             String pin = "" + Math.abs(first3);
 
+
+            try{
+
+                if(accounttype.equals(""))
+                {
+                    JOptionPane.showMessageDialog(null,"accoutn type is required");
+                } else if (bank_service.equals("")) {
+                    JOptionPane.showMessageDialog(null,"please  add any services");
+
+                } else if (cardno.equals("")) {
+                    JOptionPane.showMessageDialog(null,"please wait account number is not ready");
+
+                } else if (pin.equals("")) {
+                    JOptionPane.showMessageDialog(null,"please wait pin number is not ready");
+
+                }
+                else {
+                    String query="insert into accountdetails(account_number ,pin_number,user_Id,account_type,services) values(?,?,?,?,?)";
+
+                    PreparedStatement pst= connection.prepareStatement(query);
+
+                    pst.setString(1,cardno);
+                    pst.setString(2,pin);
+                    pst.setString(3,formnum);
+                    pst.setString(4,accounttype);
+                    pst.setString(5,bank_service);
+                    int rowAffeced=pst.executeUpdate();
+                    if(rowAffeced>0)
+                    {
+                        String loginquery="insert into signup(user_formnum,card_num,pin_num) values (?,?,?)";
+                        try{
+                            PreparedStatement loginpst=connection.prepareStatement(loginquery);
+                            loginpst.setString(1,formnum);
+                            loginpst.setString(2,cardno);
+                            loginpst.setString(3,pin);
+                            int rowaf=loginpst.executeUpdate();
+                            if(rowaf>0)
+                            {
+                                System.out.println("login successfully.......");
+                            }
+                            else {
+                                JOptionPane.showMessageDialog(null,"something wrong.....");
+                            }
+                        }
+                        catch (SQLException SE)
+                        {
+                            System.out.println(SE.getMessage());
+                        }
+                    }
+
+                }
+
+
+            }
+            catch(SQLException se)
+            {
+                System.out.println(se.getMessage());
+            }
+
         } else if (ae.getSource()==cancel) {
 
 
@@ -283,6 +347,6 @@ public class signupthree extends JFrame implements ActionListener {
 
 
     public static void main(String[] args) {
-        new signupthree("1234");
+//        new signupthree("1234");
     }
 }

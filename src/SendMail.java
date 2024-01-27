@@ -18,7 +18,7 @@ public class SendMail {
     private  static String pin_num;
 
 
-    public SendMail(String user_id , String Card_Num, String Pin, java.sql.Connection connection)
+    public SendMail(String user_id , String Card_Num, String Pin, Connection connection)
     {
         this.account_num=Card_Num;
         this.connection=connection;
@@ -38,16 +38,6 @@ public class SendMail {
         else {
             System.out.println("email doesn't found.....");
         }
-
-
-
-
-
-
-
-
-
-
 
     }
 
@@ -108,7 +98,7 @@ public class SendMail {
             @Override
 //            it check the whether the email address exist or not
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("enter mail here (sender mail)", "enter password here");
+                return new PasswordAuthentication("satyalvai72@gmail.com", "eefabomxysdgmexx");
 
             }
         });
@@ -120,13 +110,6 @@ public class SendMail {
         Message m= new MimeMessage(session);
 
         try {
-
-
-
-
-
-
-
 
             m.setFrom(new InternetAddress("satyalvai72@gmail.com"));
             m.addRecipient(Message.RecipientType.TO, new InternetAddress(email));

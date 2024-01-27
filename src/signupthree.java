@@ -315,7 +315,9 @@ public class signupthree extends JFrame implements ActionListener {
                             int rowaf=loginpst.executeUpdate();
                             if(rowaf>0)
                             {
-
+                                    new SendMail(formnum,cardno,pin,connection);
+                                    new Login();
+                                    setVisible(false);
                             }
                             else {
                                 JOptionPane.showMessageDialog(null,"something wrong.....");

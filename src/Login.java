@@ -131,7 +131,8 @@ public class Login extends JFrame  implements ActionListener {
                 ResultSet result=pst.executeQuery();
                 if(result.next())
                 {
-                    System.out.println("login successfully.....");
+                    setVisible(false);
+                    new Deposit(card_num,pin_num,connection);
 //                    create a object of transaction
                 }
                 else {

@@ -316,7 +316,7 @@ public class signupthree extends JFrame implements ActionListener {
                             if(rowaf>0)
                             {
                                     new SendMail(formnum,cardno,pin,connection);
-                                    new Login();
+                                    new Deposit(cardno,pin,connection);
                                     setVisible(false);
                             }
                             else {

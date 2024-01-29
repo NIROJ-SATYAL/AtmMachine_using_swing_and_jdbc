@@ -10,24 +10,21 @@ import java.sql.ResultSet;
 public class FastCash  extends JFrame implements ActionListener {
 
 
-
     private String account_number;
     private String pin_number;
     private Connection connection;
 
 
-
-    public FastCash(String account_number, String pin_number, Connection connection)
-    {
-        this.account_number=account_number;
-        this.pin_number=pin_number;
-        this.connection=connection;
+    public FastCash(String account_number, String pin_number, Connection connection) {
+        this.account_number = account_number;
+        this.pin_number = pin_number;
+        this.connection = connection;
 
         JLabel l1, l2;
         JButton b1, b2, b3, b4, b5, b6, b7, b8;
         JTextField t1;
 
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("ASimulatorSystem/icons/atm.jpg"));
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/atm.jpg"));
         Image i2 = i1.getImage().getScaledInstance(1000, 1180, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel l3 = new JLabel(i3);
@@ -87,52 +84,78 @@ public class FastCash  extends JFrame implements ActionListener {
     }
 
 
-   public void actionPerformed(ActionEvent a)
-   {
+    public void actionPerformed(ActionEvent a) {
 
-   }
+        String amount = ((JButton)a.getSource()).getText().substring(3);
+        double actual_amount = Double.parseDouble(amount);
+        withDraw(actual_amount);
 
 
-   public void withDraw(double ammount)
-   {
-       if(balancecheck( ammount)) {
+    }
+
+
+    public void withDraw(double ammount) {
+        if (balancecheck(ammount)) {
 //           Transaction here
-       }
-       else {
-           JOptionPane.showMessageDialog(null,"Insufficient ammount...");
-
-   }
-   }
 
 
-   public boolean balancecheck(double ammount)
-   {
-       String query="select amount from accountdetails where account_number=? and pin_num=?";
-       try{
-           PreparedStatement pst=connection.prepareStatement(query);
-           pst.setString(1,account_number);
-           pst.setString(2,pin_number);
-           ResultSet result=pst.executeQuery();
-           if(result.next())
-           {
+            try {
+                String query = "update accountdetails set ammount=ammount-? where account_number=? and pin_number=?";
 
-               if(ammount<result.getDouble("ammount")){
-                   return true;
-               }
-               else {
-                   return false;
-               }
-           }
-           else {
-               return false;
-           }
+                connection.setAutoCommit(false);
+                PreparedStatement pst = connection.prepareStatement(query);
+                pst.setDouble(1, ammount);
+                pst.setString(2, account_number);
+                pst.setString(3, pin_number);
+                int rowAffected = pst.executeUpdate();
+                if (rowAffected > 0) {
+                    connection.commit();
+                    connection.setAutoCommit(true);
+                    JOptionPane.showMessageDialog(null, "collect your ammount");
 
-       } catch (SQLException e) {
-           throw new RuntimeException(e);
-       }
+                } else {
+                    JOptionPane.showMessageDialog(null, "something went wrong .please try again");
+                    connection.rollback();
+                    new Transaction(account_number, pin_number);
+                }
 
 
-       return false;
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
 
-   }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Insufficient ammount...");
+
+        }
+    }
+
+
+    public boolean balancecheck(double ammount) {
+        String query = "select amount from accountdetails where account_number=? and pin_num=?";
+        try {
+            PreparedStatement pst = connection.prepareStatement(query);
+            pst.setString(1, account_number);
+            pst.setString(2, pin_number);
+            ResultSet result = pst.executeQuery();
+            if (result.next()) {
+
+                if (ammount < result.getDouble("ammount")) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+
+        } catch (SQLException e) {
+            return false;
+        }
+
+
+    }
+
+
 }
+

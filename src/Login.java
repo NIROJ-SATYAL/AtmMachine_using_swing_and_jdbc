@@ -132,7 +132,7 @@ public class Login extends JFrame  implements ActionListener {
                 if(result.next())
                 {
                     setVisible(false);
-                    new Deposit(card_num,pin_num,connection);
+                    new Transaction(card_num,pin_num);
 //                    create a object of transaction
                 }
                 else {

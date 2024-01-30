@@ -102,7 +102,7 @@ public class SendMail {
         //        variable for gmail
         String host = "smtp.gmail.com";
         String subject="Account_Number";
-        String message="Account Number:" + account_num +"\n" + "Pin Number" + pin_num + "\n" + "userId" + user_id + "\n";
+        String message="Account Number:" + account_num +"\n" + "Pin Number:" + pin_num + "\n" + "userId:" + user_id + "\n";
 
 //        load the properties
 

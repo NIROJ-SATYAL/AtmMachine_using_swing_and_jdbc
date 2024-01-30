@@ -4,7 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class BalanceInquery {
+public class BalanceEnquiry {
 
 
 
@@ -14,7 +14,7 @@ public class BalanceInquery {
     private Connection connection;
 
 
-    public BalanceInquery(String account_number,String pin_number)
+    public BalanceEnquiry(String account_number, String pin_number)
     {
         this.account_number=account_number;
         this.pin_number=pin_number;

@@ -13,7 +13,7 @@ public class Transaction extends JFrame implements ActionListener {
 
 
     JLabel l1;
-    JButton DepositButton,CashWithdrawlButton,FastCashButton,TransferButton,PinChangeButton,BalanceEnqueryButton,ExitButton;
+    JButton DepositButton,CashWithdrawlButton,FastCashButton,TransferButton,PinChangeButton, BalanceEnquiryButton,ExitButton;
 
 
 
@@ -47,7 +47,7 @@ public class Transaction extends JFrame implements ActionListener {
         FastCashButton = new JButton("FAST CASH");
         TransferButton = new JButton("Transfer Money");
         PinChangeButton = new JButton("PIN CHANGE");
-        BalanceEnqueryButton = new JButton("BALANCE ENQUIRY");
+        BalanceEnquiryButton = new JButton("BALANCE ENQUIRY");
         ExitButton = new JButton("EXIT");
 
         setLayout(null);
@@ -70,8 +70,8 @@ public class Transaction extends JFrame implements ActionListener {
         PinChangeButton.setBounds(170,588,150,35);
         l2.add(PinChangeButton);
 
-        BalanceEnqueryButton.setBounds(390,588,150,35);
-        l2.add(BalanceEnqueryButton);
+        BalanceEnquiryButton.setBounds(390,588,150,35);
+        l2.add(BalanceEnquiryButton);
 
         ExitButton.setBounds(390,633,150,35);
         l2.add(ExitButton);
@@ -82,7 +82,7 @@ public class Transaction extends JFrame implements ActionListener {
         FastCashButton.addActionListener(this);
         TransferButton.addActionListener(this);
         PinChangeButton.addActionListener(this);
-        BalanceEnqueryButton.addActionListener(this);
+        BalanceEnquiryButton.addActionListener(this);
         ExitButton.addActionListener(this);
 
 
@@ -119,9 +119,9 @@ public class Transaction extends JFrame implements ActionListener {
         }else if(a.getSource()==PinChangeButton){
             setVisible(false);
             new PinChange(account_number,user_pin).setVisible(true);
-        }else if(a.getSource()==BalanceEnqueryButton){
+        }else if(a.getSource()== BalanceEnquiryButton){
             this.setVisible(false);
-            new BalanceInquery(account_number,user_pin);
+            new BalanceEnquiry(account_number,user_pin);
         }else if(a.getSource()==ExitButton){
             System.exit(0);
         }

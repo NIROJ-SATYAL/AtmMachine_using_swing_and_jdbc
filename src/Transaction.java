@@ -1,13 +1,19 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 
-public class Transaction extends JFrame  {
+public class Transaction extends JFrame implements ActionListener {
 
 
     private  String  account_number;
     private   String user_pin;
     private Connection connection;
+
+
+    JLabel l1;
+    JButton DepositButton,CashWithdrawlButton,FastCashButton,TransferButton,PinChangeButton,BalanceEnqueryButton,ExitButton;
 
 
 
@@ -20,8 +26,7 @@ public class Transaction extends JFrame  {
 
             Conn conn=new Conn();
             this.connection=conn.c;
-        JLabel l1;
-        JButton DepositButton,CashWithdrawlButton,FastCashButton,MiniStatementButoon,PinChangeButton,BalanceEnqueryButton,ExitButton;
+
 
 
 
@@ -40,7 +45,7 @@ public class Transaction extends JFrame  {
         DepositButton = new JButton("DEPOSIT");
         CashWithdrawlButton = new JButton("CASH WITHDRAWL");
         FastCashButton = new JButton("FAST CASH");
-        MiniStatementButoon = new JButton("Transfer Money");
+        TransferButton = new JButton("Transfer Money");
         PinChangeButton = new JButton("PIN CHANGE");
         BalanceEnqueryButton = new JButton("BALANCE ENQUIRY");
         ExitButton = new JButton("EXIT");
@@ -59,8 +64,8 @@ public class Transaction extends JFrame  {
         FastCashButton.setBounds(170,543,150,35);
         l2.add(FastCashButton);
 
-        MiniStatementButoon.setBounds(390,543,150,35);
-        l2.add(MiniStatementButoon);
+        TransferButton.setBounds(390,543,150,35);
+        l2.add(TransferButton);
 
         PinChangeButton.setBounds(170,588,150,35);
         l2.add(PinChangeButton);
@@ -72,13 +77,13 @@ public class Transaction extends JFrame  {
         l2.add(ExitButton);
 
 
-//        DepositButton.addActionListener(this);
-//        CashWithdrawlButton.addActionListener(this);
-//        FastCashButton.addActionListener(this);
-//        MiniStatementButoon.addActionListener(this);
-//        PinChangeButton.addActionListener(this);
-//        BalanceEnqueryButton.addActionListener(this);
-//        ExitButton.addActionListener(this);
+        DepositButton.addActionListener(this);
+        CashWithdrawlButton.addActionListener(this);
+        FastCashButton.addActionListener(this);
+        TransferButton.addActionListener(this);
+        PinChangeButton.addActionListener(this);
+        BalanceEnqueryButton.addActionListener(this);
+        ExitButton.addActionListener(this);
 
 
         setSize(960,1080);
@@ -86,6 +91,37 @@ public class Transaction extends JFrame  {
         setUndecorated(true);
         setVisible(true);
 
+    }
+
+
+
+
+
+
+    @Override
+
+    public void actionPerformed(ActionEvent a)
+    {
+        if(a.getSource()==DepositButton){
+            setVisible(false);
+            new Deposit(account_number,user_pin).setVisible(true);
+        }else if(a.getSource()==CashWithdrawlButton){
+            setVisible(false);
+            new Withdraw(account_number,user_pin).setVisible(true);
+        }else if(a.getSource()==FastCashButton){
+            setVisible(false);
+            new FastCash(account_number,user_pin,connection).setVisible(true);
+        }else if(a.getSource()==TransferButton){
+            new Transfer_money(account_number,user_pin).setVisible(true);
+        }else if(a.getSource()==PinChangeButton){
+            setVisible(false);
+            new PinChange(account_number,user_pin).setVisible(true);
+        }else if(a.getSource()==BalanceEnqueryButton){
+            this.setVisible(false);
+            new BalanceInquery(account_number,user_pin);
+        }else if(a.getSource()==ExitButton){
+            System.exit(0);
+        }
     }
 
 

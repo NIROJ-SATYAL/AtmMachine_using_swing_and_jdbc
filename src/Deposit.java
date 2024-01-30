@@ -15,7 +15,7 @@ public class Deposit  extends JFrame  implements ActionListener {
     String account_number;
     Connection connection;
 
-   public Deposit(String account_number, String pin,Connection connection){
+   public Deposit(String account_number, String pin){
         this.pin = pin;
         this.account_number=account_number;
         this.connection=connection;

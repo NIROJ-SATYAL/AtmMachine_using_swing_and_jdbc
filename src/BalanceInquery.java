@@ -36,6 +36,8 @@ public class BalanceInquery {
             {
                 double ammount=result.getDouble("ammount");
                 JOptionPane.showMessageDialog(null,"your actual balance is:" + ammount);
+                connection.close();
+                new Transaction(account_number,pin_number);
             }
 
 

@@ -11,14 +11,15 @@ public class Deposit  extends JFrame  implements ActionListener {
     JTextField t1,t2;
     JButton b1,b2,b3;
     JLabel l1,l2,l3;
-    String pin;
-    String account_number;
-    Connection connection;
+   private String pin;
+   private String account_number;
+   private Connection connection;
 
    public Deposit(String account_number, String pin){
         this.pin = pin;
         this.account_number=account_number;
-        this.connection=connection;
+        Conn conn=new Conn();
+        this.connection=conn.c;
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/atm.jpg"));
         Image i2 = i1.getImage().getScaledInstance(1000, 1180, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
@@ -92,8 +93,11 @@ public class Deposit  extends JFrame  implements ActionListener {
                    {
                        connection.commit();
                        connection.setAutoCommit(true);
+
+                       JOptionPane.showMessageDialog(null,"ammount DEPOSITED SUCCESSFULLY");
                        setVisible(false);
-                       new Login();
+
+                       new Transaction(account_number,pin);
                    }
                    else {
                        connection.rollback();

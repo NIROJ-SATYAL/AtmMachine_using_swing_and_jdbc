@@ -112,6 +112,7 @@ public class Login extends JFrame  implements ActionListener {
         setLocation(350,200);
 //        to change the background color of frame
         getContentPane().setBackground(Color.white);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
 

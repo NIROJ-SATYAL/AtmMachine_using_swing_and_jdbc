@@ -91,6 +91,9 @@ public class Transaction extends JFrame implements ActionListener {
         setUndecorated(true);
         setVisible(true);
 
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
 
 

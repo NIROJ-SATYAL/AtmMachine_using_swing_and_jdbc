@@ -404,10 +404,6 @@ public class Signuptwo  extends JFrame implements    ActionListener  {
     }
 
 
-    public static void main(String[] args) {
-//        System.out.println("signup2");
-//        new Signuptwo(1234);
-    }
 
 
 

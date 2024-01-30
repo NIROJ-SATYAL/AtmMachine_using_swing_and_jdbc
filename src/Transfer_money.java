@@ -94,6 +94,8 @@ public class Transfer_money extends  JFrame implements ActionListener {
         setLocation(500,0);
         setUndecorated(true);
         setVisible(true);
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
 

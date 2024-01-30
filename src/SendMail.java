@@ -1,3 +1,7 @@
+import com.sun.tools.javac.Main;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +20,29 @@ public class SendMail {
     private static String user_id;
     private static String account_num;
     private  static String pin_num;
+    private static String mail_id;
+    private  static  String mail_password;
 
+
+
+
+    static {
+        loadDatabaseProperties();
+    }
+
+    private static void loadDatabaseProperties() {
+        try (InputStream input = Main.class.getClassLoader().getResourceAsStream("env.properties")) {
+            Properties properties = new Properties();
+            if (input != null) {
+                properties.load(input);
+                mail_id = properties.getProperty("mail");
+                mail_password = properties.getProperty("password");
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public SendMail(String user_id , String Card_Num, String Pin, Connection connection)
     {
@@ -98,7 +124,7 @@ public class SendMail {
             @Override
 //            it check the whether the email address exist or not
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("satyalvai72@gmail.com", "eefabomxysdgmexx");
+                return new PasswordAuthentication(mail_id, mail_password);
 
             }
         });

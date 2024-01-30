@@ -128,7 +128,8 @@ public class PinChange extends JFrame implements  ActionListener {
 
 
         } else if (a.getSource()==b2) {
-            new Transaction(account_number,pin_number);
+            setVisible(false);
+            new Login();
 
         }
     }

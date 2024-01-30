@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Login extends JFrame  implements ActionListener {
-    Connection connection;
+     private  final Connection   connection;
     JButton signin ,clear, signup;
 
     JTextField cardfield;

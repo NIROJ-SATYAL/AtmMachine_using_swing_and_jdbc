@@ -14,9 +14,9 @@ public class Transfer_money extends  JFrame implements ActionListener {
 
 
 
-    private String account_number;
-    private String pin_number;
-    private Connection connection;
+    private final String account_number;
+    private final String pin_number;
+    private final Connection connection;
 
 
 
@@ -68,22 +68,23 @@ public class Transfer_money extends  JFrame implements ActionListener {
 
         setLayout(null);
 
-        l1.setBounds(190,350,400,20);
+        l1.setBounds(190,330,400,20);
         l4.add(l1);
 
-        l2.setBounds(190,400,400,20);
+        l2.setBounds(190,370,400,20);
         l4.add(l2);
 
-        t1.setBounds(190,450,330,30);
+        t1.setBounds(190,400,330,30);
         l4.add(t1);
-        l3.setBounds(190 ,500,400,20);
+        l3.setBounds(190 ,450,400,20);
         l4.add(l3);
-        t2.setBounds(190,550,400,30);
+        t2.setBounds(190,500,330,30);
+        l4.add(t2);
 
-        b1.setBounds(390,630,150,35);
+        b1.setBounds(390,580,150,35);
         l4.add(b1);
 
-        b2.setBounds(390,688,150,35);
+        b2.setBounds(390,640,150,35);
         l4.add(b2);
 
         b1.addActionListener(this);
@@ -106,13 +107,14 @@ public class Transfer_money extends  JFrame implements ActionListener {
             String fetch_ammount=t1.getText();
             try {
                 double actualAmount = Double.parseDouble(fetch_ammount);
+                WithdrawlAmmountAndBalanceCheck ob=new WithdrawlAmmountAndBalanceCheck(account_number,pin_number,connection);
 
-              if(FastCash.balancecheck(actualAmount))
+              if(ob.balancecheck(actualAmount))
               {
                   if(checkAccountNumber(t2.getText()))
                   {
                     String sendquery="update accountdetails set ammount=ammount-? where account_number=?";
-                    String receivequery="update accountdetaails set ammount=ammount+ ? where account_number=?";
+                    String receivequery="update accountdetails set ammount=ammount+? where account_number=?";
                     try{
                         connection.setAutoCommit(false);
 
@@ -160,6 +162,11 @@ public class Transfer_money extends  JFrame implements ActionListener {
                 System.out.println("Error: Invalid amount format");
             }
 
+        } else if (a.getSource()==b2) {
+            setVisible(false);
+
+            new Transaction(account_number,pin_number);
+
         }
     }
 
@@ -185,4 +192,9 @@ public class Transfer_money extends  JFrame implements ActionListener {
            return false;
         }
     }
+
+
+
+
+
 }

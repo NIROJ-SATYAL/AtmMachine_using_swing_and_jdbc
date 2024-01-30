@@ -14,6 +14,7 @@ public class Withdraw  extends JFrame  implements ActionListener {
 
     private  String account_number;
     private String pin_number;
+    private Connection connection;
 
 
 
@@ -30,7 +31,8 @@ public class Withdraw  extends JFrame  implements ActionListener {
             this.account_number=account_number;
             this.pin_number=pin_number;
 
-
+            Conn conn=new Conn();
+            this.connection=conn.c;
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/atm.jpg"));
         Image i2 = i1.getImage().getScaledInstance(1000, 1180, Image.SCALE_DEFAULT);
@@ -88,7 +90,8 @@ public class Withdraw  extends JFrame  implements ActionListener {
             String fetch_ammount=t1.getText();
             try {
                 double actualAmount = Double.parseDouble(fetch_ammount);
-                FastCash.withDraw(actualAmount);
+                WithdrawlAmmountAndBalanceCheck ob=new WithdrawlAmmountAndBalanceCheck(account_number,pin_number,connection);
+                ob.withDraw(actualAmount);
                 // Now, you can use 'actualAmount' as a double
 
             } catch (NumberFormatException e) {

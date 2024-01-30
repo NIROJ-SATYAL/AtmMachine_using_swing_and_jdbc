@@ -10,9 +10,9 @@ import java.sql.ResultSet;
 public class FastCash  extends JFrame implements ActionListener {
 
 
-    private String account_number;
-    private String pin_number;
-    private Connection connection;
+    private static String account_number;
+    private  static String pin_number;
+    private static Connection connection;
 
 
     public FastCash(String account_number, String pin_number, Connection connection) {
@@ -94,7 +94,7 @@ public class FastCash  extends JFrame implements ActionListener {
     }
 
 
-    public void withDraw(double ammount) {
+    public static void withDraw(double ammount) {
         if (balancecheck(ammount)) {
 //           Transaction here
 
@@ -131,7 +131,7 @@ public class FastCash  extends JFrame implements ActionListener {
     }
 
 
-    public boolean balancecheck(double ammount) {
+    public  static boolean balancecheck(double ammount) {
         String query = "select amount from accountdetails where account_number=? and pin_num=?";
         try {
             PreparedStatement pst = connection.prepareStatement(query);

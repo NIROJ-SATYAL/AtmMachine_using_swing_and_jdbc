@@ -14,7 +14,7 @@ public class Withdraw  extends JFrame  implements ActionListener {
 
     private  String account_number;
     private String pin_number;
-    private Connection connecction;
+
 
 
 
@@ -24,14 +24,15 @@ public class Withdraw  extends JFrame  implements ActionListener {
     String pin;
 
 
-    public Withdraw(String account_number,String pin_number,Connection connection)
+    public Withdraw(String account_number,String pin_number)
     {
 
+            this.account_number=account_number;
+            this.pin_number=pin_number;
 
 
 
-
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("ASimulatorSystem/icons/atm.jpg"));
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/atm.jpg"));
         Image i2 = i1.getImage().getScaledInstance(1000, 1180, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel l4 = new JLabel(i3);
@@ -84,7 +85,18 @@ public class Withdraw  extends JFrame  implements ActionListener {
 
         if(a.getSource()==b1)
         {
-            System.out.println("withdrawl successfully..........");
+            String fetch_ammount=t1.getText();
+            try {
+                double actualAmount = Double.parseDouble(fetch_ammount);
+                FastCash.withDraw(actualAmount);
+                // Now, you can use 'actualAmount' as a double
+
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Invalid amount format");
+            }
+
+
+
         } else if (a.getSource()==b2) {
             new Transaction(account_number,pin_number);
 

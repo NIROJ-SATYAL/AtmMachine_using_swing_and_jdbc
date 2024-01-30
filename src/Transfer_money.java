@@ -3,6 +3,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Transfer_money extends  JFrame implements ActionListener {
 
@@ -26,6 +29,9 @@ public class Transfer_money extends  JFrame implements ActionListener {
     public Transfer_money(String account_number,String pin_number){
         this.account_number=account_number;
         this.pin_number=pin_number;
+
+        Conn newconnection=new Conn();
+        this.connection=newconnection.c;
 
 
 
@@ -97,6 +103,86 @@ public class Transfer_money extends  JFrame implements ActionListener {
         {
 
 
+            String fetch_ammount=t1.getText();
+            try {
+                double actualAmount = Double.parseDouble(fetch_ammount);
+
+              if(FastCash.balancecheck(actualAmount))
+              {
+                  if(checkAccountNumber(t2.getText()))
+                  {
+                    String sendquery="update accountdetails set ammount=ammount-? where account_number=?";
+                    String receivequery="update accountdetaails set ammount=ammount+ ? where account_number=?";
+                    try{
+                        connection.setAutoCommit(false);
+
+                        PreparedStatement sendpst=connection.prepareStatement(sendquery);
+                        PreparedStatement receivepst=connection.prepareStatement(receivequery);
+
+                        sendpst.setDouble(1,actualAmount);
+                        sendpst.setString(2,account_number);
+                        receivepst.setDouble(1,actualAmount);
+                        receivepst.setString(2,t2.getText());
+                        int sendrowaffected=sendpst.executeUpdate();
+                        int receiverowafected=receivepst.executeUpdate();
+
+                        if(sendrowaffected>0 && receiverowafected>0)
+                        {
+                            connection.commit();
+                            connection.setAutoCommit(true);
+                             JOptionPane.showMessageDialog(null,"Balance Transfer Successfully......");
+                             connection.close();
+                        }
+                        else {
+                            connection.rollback();
+                            JOptionPane.showMessageDialog(null,"Error to Transfer Balance");
+                            connection.setAutoCommit(true);
+                            connection.close();
+                        }
+
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                  }
+                  else {
+                      JOptionPane.showMessageDialog(null,"cannot find that account number");
+                  }
+
+
+              }
+              else {
+                  JOptionPane.showMessageDialog(null,"Insufficient ammoutn");
+              }
+
+
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Invalid amount format");
+            }
+
+        }
+    }
+
+
+    public boolean checkAccountNumber(String accountNumber){
+        String query="select * from accountdetails where account_number=?";
+
+        try{
+            PreparedStatement pst=connection.prepareStatement(query);
+            pst.setString(1,accountNumber);
+
+            ResultSet result=pst.executeQuery();
+            if (result.next()) {
+                return true;
+
+            }
+            else{
+                return false;
+            }
+
+
+        } catch (SQLException e) {
+           return false;
         }
     }
 }

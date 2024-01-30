@@ -5,9 +5,11 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.sql.*;
 
-public class PinChange extends JFrame {
+public class PinChange extends JFrame implements  ActionListener {
 
-
+    private String account_number;
+    private String pin_number;
+    private Connection connection;
 
     JPasswordField t1,t2;
     JButton b1,b2;
@@ -16,9 +18,14 @@ public class PinChange extends JFrame {
 
 
 
-    public PinChange()
+    public PinChange( String account_number,String Pin_number)
     {
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("ASimulatorSystem/icons/atm.jpg"));
+
+        Conn newconnection=new Conn();
+        this.connection=newconnection.c;
+        this.account_number=account_number;
+        this.pin_number=pin_number;
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/atm.jpg"));
         Image i2 = i1.getImage().getScaledInstance(1000, 1180, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel l4 = new JLabel(i3);
@@ -77,4 +84,56 @@ public class PinChange extends JFrame {
         setUndecorated(true);
         setVisible(true);
     }
+
+
+
+    @Override
+
+    public void actionPerformed(ActionEvent a)
+    {
+        if(a.getSource()==b1)
+        {
+            String npin = t1.getText();
+            String rpin = t2.getText();
+
+            if(!npin.equals(rpin)){
+                JOptionPane.showMessageDialog(null, "Entered PIN does not match");
+                return;
+            }
+
+            try{
+
+                String query1="update accountdetails set pin_number=?  where account_number=?";
+                String query2="update signup set pin_num=? where card_num=?";
+                PreparedStatement pst1=connection.prepareStatement(query1);
+                PreparedStatement pst2=connection.prepareStatement(query2);
+                pst1.setString(1,npin);
+                pst1.setString(2,account_number);
+                pst2.setString(1,npin);
+                pst2.setString(2,account_number);
+                int rowAffected1=pst1.executeUpdate();
+                int rowAffected2=pst2.executeUpdate();
+                if(rowAffected1>0 && rowAffected2>0)
+                {
+                    JOptionPane.showMessageDialog(null,"pin change successfully...");
+                }
+                else {
+                    JOptionPane.showMessageDialog(null,"failed to change pin..");
+                }
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+
+        } else if (a.getSource()==b2) {
+            new Transaction(account_number,pin_number);
+
+        }
+    }
+
+
+
+
+
 }

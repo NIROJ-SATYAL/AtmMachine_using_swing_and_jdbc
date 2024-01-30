@@ -116,6 +116,7 @@ public class PinChange extends JFrame implements  ActionListener {
                 if(rowAffected1>0 && rowAffected2>0)
                 {
                     JOptionPane.showMessageDialog(null,"pin change successfully...");
+                    connection.close();
                 }
                 else {
                     JOptionPane.showMessageDialog(null,"failed to change pin..");

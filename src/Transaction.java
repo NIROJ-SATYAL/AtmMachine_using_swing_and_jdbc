@@ -40,7 +40,7 @@ public class Transaction extends JFrame  {
         DepositButton = new JButton("DEPOSIT");
         CashWithdrawlButton = new JButton("CASH WITHDRAWL");
         FastCashButton = new JButton("FAST CASH");
-        MiniStatementButoon = new JButton("MINI STATEMENT");
+        MiniStatementButoon = new JButton("Transfer Money");
         PinChangeButton = new JButton("PIN CHANGE");
         BalanceEnqueryButton = new JButton("BALANCE ENQUIRY");
         ExitButton = new JButton("EXIT");
